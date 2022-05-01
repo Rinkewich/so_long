@@ -14,7 +14,8 @@ SRCS_S		=	main.c\
 				error.c\
 				get_next_line.c\
 				get_next_line_utils.c\
-				map_check_hw.c
+				map_check_lwpe.c\
+				map_check_c.c
 HEADERS		=	./header/so_long.h
 OBJS_S		=	$(addprefix $(OBJS_DIR), $(notdir $(SRCS_S:.c=.o)))
 LIBFT		=	./libft/libft.a

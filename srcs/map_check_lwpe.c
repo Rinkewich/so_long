@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_check_hw.c                                     :+:      :+:    :+:   */
+/*   map_check_lwpe.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 15:52:52 by fardath           #+#    #+#             */
-/*   Updated: 2022/05/01 21:20:53 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/01 21:39:26 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ int	check_wall(int length, int height, char **map)
 	i = 0;
 	while (i < length - 1)
 	{
-		if (map[0][i] != '1' || map[height - 1][i] != '1')
+		if (map[0][i] != WALL || map[height - 1][i] != WALL)
 			return (0);
 		i++;
 	}
 	i = 0;
 	while (i < height)
 	{
-		if (map[i][0] != '1' || map[i][length - 2] != '1')
+		if (map[i][0] != WALL || map[i][length - 2] != WALL)
 			return (0);
 		i++;
 	}
@@ -84,6 +84,30 @@ int	check_player(t_game_map *map)
 	return (0);
 }
 
+int	check_exit(t_game_map *map)
+{
+	int	count;
+	int	x;
+	int	y;
+
+	count = 0;
+	x = 0;
+	y = 0;
+	while (y < map->map_height)
+	{
+		while (x < map->map_length)
+		{
+			if (map->map_data[y][x] == EXIT)
+			{
+				count++;
+			}
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+	return (count);
+}
 void	check_map(t_game_map *map)
 {
 	if (!check_length((&map->map_length), map->map_height, map->map_data))
@@ -92,4 +116,8 @@ void	check_map(t_game_map *map)
 		error("Invalid wall");
 	if (!check_player(map))
 		error("Invalid player");
+	if (!check_exit(map))
+		error("You are closed in the game");
+	if (!check_count(map))
+		error("You were deprived of the prize");
 }

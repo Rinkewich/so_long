@@ -6,7 +6,7 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 21:24:09 by fardath           #+#    #+#             */
-/*   Updated: 2022/05/01 21:28:05 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/01 21:41:26 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include <fcntl.h>
 
 # define PLAYER 'P'
+# define WALL '1'
+# define EXIT 'E'
+# define COUNT 'C'
 
 typedef struct s_game_map
 {
@@ -67,4 +70,6 @@ int			check_length(int *length, int height, char **map);
 int			check_wall(int length, int height, char **map);
 void		check_map(t_game_map *map);
 int			check_player(t_game_map *map);
+int			check_exit(t_game_map *map);
+int			check_count(t_game_map *map);
 #endif
