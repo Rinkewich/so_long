@@ -6,7 +6,7 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 16:12:50 by fardath           #+#    #+#             */
-/*   Updated: 2022/04/30 21:33:30 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/01 21:22:50 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*read_file_to_n(int fd, char *all_file)
 }
 
 char	*get_next_line(int fd)
-{ 
+{
 	char			*line;
 	static char		*all_file[4500];
 

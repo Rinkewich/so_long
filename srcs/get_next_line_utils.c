@@ -6,7 +6,7 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 16:17:13 by fardath           #+#    #+#             */
-/*   Updated: 2022/04/30 21:20:12 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/01 21:21:19 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*ft_strjoin_g(char *s1, char *s2)
 	}
 	if (!s1 || !s2)
 		return (NULL);
-	len = (char *) malloc(sizeof(char) * (ft_strlen_g(s1) + ft_strlen_g(s2)) + 1);
+	len = (char *) malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
 	if (len == NULL)
 		return (NULL);
 	while (s1[len_s1])

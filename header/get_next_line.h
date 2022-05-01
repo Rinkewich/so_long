@@ -6,7 +6,7 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 18:11:00 by fardath           #+#    #+#             */
-/*   Updated: 2022/04/30 21:32:53 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/01 21:23:45 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #  define BUFFER_SIZE 1000
 # endif
 
-char *get_next_line(int fd);
+char	*get_next_line(int fd);
 size_t	ft_strlen_g( const char *str);
 void	*ft_memcpy_g(void *dst, const void *src, size_t n);
 char	*ft_strdup_g(const char *s1);

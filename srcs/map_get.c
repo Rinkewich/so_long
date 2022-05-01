@@ -6,45 +6,56 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:16:04 by fardath           #+#    #+#             */
-/*   Updated: 2022/04/30 21:56:00 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/01 21:18:48 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/so_long.h"
-static int check_length(int *length, int height, char **map)
-{
-	int l_length;
 
-	l_length = 0;
-	height--;
-	*length = ft_strlen(map[height]);
-	(*length)++;
-	while (height--)
+int	get_height(char *file)
+{
+	int		height;
+	int		fd;
+	char	*str;
+
+	height = 0;
+	str = NULL;
+	fd = open(file, O_RDONLY);
+	str = get_next_line(fd);
+	while (str != NULL)
 	{
-		
-		l_length = ft_strlen(map[height]);
-		if (l_length != *length)
-			return (0);
+		height++;
+		free(str);
+		str = get_next_line(fd);
 	}
-	return (1);
+	close(fd);
+	return (height);
 }
-static int	open_file_map(char *argv, t_game_map *map, int *height)
-{
-	int	fd;
 
+int	open_file_map(char *argv, t_game_map *map, int *height)
+{
+	int		fd;
+	char	*str;
+	int		i;
+
+	str = NULL;
+	i = 0;
 	*height = 0;
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
 		return (0);
-	map->map_data = malloc(sizeof(char **) * 1);
+	map->map_data = (char **)malloc(sizeof(char *) * (get_height(argv) + 1));
 	if (!(map->map_data))
 		return (0);
-	map->map_data[*height] = get_next_line(fd);
-	while (map->map_data[*height] != NULL)
+	str = get_next_line(fd);
+	while (str)
 	{
-		(*height)++;
-		map->map_data[*height] = get_next_line(fd);
+		map->map_data[(*height)++] = ft_strdup(str);
+		free(str);
+		str = get_next_line(fd);
 	}
+	free(str);
+	map->map_data[*height] = NULL;
 	close(fd);
 	return (1);
 }
@@ -62,14 +73,20 @@ int	get_filename(char *argv)
 
 void	get_map(int argc, char **argv, t_game_map *map)
 {
-	int	map_height;
 	int	map_length;
+	int	map_height;
 
-	map = malloc(sizeof(t_game_map));
-	if (get_filename(argv[1]) && !map)
+	map = (t_game_map *)malloc(sizeof(t_game_map));
+	if (get_filename(argv[1]) || !map)
 		error("Invalid file name");
 	if (!open_file_map(argv[1], map, &map_height))
 		error("Internal error");
-	if (!check_length(&map_length, map_height, map->map_data))
-		error("Invalid map");
+	map->map_height = map_height;
+	map->map_length = map_length;
+	check_map(map);
+	while (map_height)
+		free(map->map_data[map_height--]);
+	free(map->map_data[0]);
+	free(map->map_data);
+	free(map);
 }

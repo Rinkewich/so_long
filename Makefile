@@ -1,6 +1,6 @@
 NAME	=	so_long
 CC		=	gcc
-FLAG	=	-Wall -Wextra -Werror
+CFLAGS	=	
 OBJS	=	$(OBJS_S)
 MLX_FLAG	=	-lmlx -framework OpenGL -framework AppKit
 
@@ -13,7 +13,8 @@ SRCS_S		=	main.c\
 				map_get.c\
 				error.c\
 				get_next_line.c\
-				get_next_line_utils.c
+				get_next_line_utils.c\
+				map_check_hw.c
 HEADERS		=	./header/so_long.h
 OBJS_S		=	$(addprefix $(OBJS_DIR), $(notdir $(SRCS_S:.c=.o)))
 LIBFT		=	./libft/libft.a
@@ -30,7 +31,7 @@ $(LIBFT):
 	make -C libft/
 
 $(NAME): $(OBJS) $(LIBFT) $(LIBMLX)
-	$(CC) $(OBJS) -o $@ $(MLX_FLAG) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) -o $@ $(MLX_FLAG) $(LIBFT)
 
 clean:
 		$(RM) -r $(OBJS_DIR)
