@@ -6,7 +6,7 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:16:04 by fardath           #+#    #+#             */
-/*   Updated: 2022/05/01 21:18:48 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/02 16:18:59 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	get_filename(char *argv)
 		return (1);
 }
 
-void	get_map(int argc, char **argv, t_game_map *map)
+int	get_map(int argc, char **argv, t_game_map *map)
 {
 	int	map_length;
 	int	map_height;
@@ -83,10 +83,7 @@ void	get_map(int argc, char **argv, t_game_map *map)
 		error("Internal error");
 	map->map_height = map_height;
 	map->map_length = map_length;
-	check_map(map);
-	while (map_height)
-		free(map->map_data[map_height--]);
-	free(map->map_data[0]);
-	free(map->map_data);
-	free(map);
+	if (check_map(map))
+		error("Upps");
+	return(1);
 }

@@ -6,7 +6,7 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 15:52:52 by fardath           #+#    #+#             */
-/*   Updated: 2022/05/01 21:39:26 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/02 16:27:13 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,16 +108,28 @@ int	check_exit(t_game_map *map)
 	}
 	return (count);
 }
-void	check_map(t_game_map *map)
+
+int	check_map(t_game_map *map)
 {
-	if (!check_length((&map->map_length), map->map_height, map->map_data))
+	int	c;
+
+	c = !check_length((&map->map_length), map->map_height, map->map_data);
+	if (c)
 		error("Invalid map");
-	if (!check_wall(map->map_length, map->map_height, map->map_data))
+	c = !check_wall(map->map_length, map->map_height, map->map_data);
+	if (c)
 		error("Invalid wall");
-	if (!check_player(map))
+	c = !check_player(map);
+	if (c)
 		error("Invalid player");
-	if (!check_exit(map))
+	c = !check_exit(map);
+	if (c)
 		error("You are closed in the game");
-	if (!check_count(map))
+	c = !check_count(map);
+	if (c)
 		error("You were deprived of the prize");
+	c = check_sign(map);
+	if (c)
+		error("Invalid characters on the map");
+	return (c);
 }

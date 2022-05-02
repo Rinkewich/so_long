@@ -6,7 +6,7 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 21:24:09 by fardath           #+#    #+#             */
-/*   Updated: 2022/05/01 21:41:26 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/02 16:17:49 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define WALL '1'
 # define EXIT 'E'
 # define COUNT 'C'
+# define FLOOR '0'
 
 typedef struct s_game_map
 {
@@ -61,15 +62,16 @@ enum	e_keycode
 	RESET = 15,
 	ESC = 53
 };
-void		get_map(int argc, char **argv, t_game_map *map);
+int		get_map(int argc, char **argv, t_game_map *map);
 int			get_filename(char *argv);
 void		error(char *error_code);
 int			open_file_map(char *argv, t_game_map *map, int *height);
 int			get_height(char *file);
 int			check_length(int *length, int height, char **map);
 int			check_wall(int length, int height, char **map);
-void		check_map(t_game_map *map);
+int		check_map(t_game_map *map);
 int			check_player(t_game_map *map);
 int			check_exit(t_game_map *map);
 int			check_count(t_game_map *map);
+int			check_sign(t_game_map *map);
 #endif
