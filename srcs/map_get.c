@@ -6,7 +6,7 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:16:04 by fardath           #+#    #+#             */
-/*   Updated: 2022/05/02 16:18:59 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/02 20:36:55 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int	get_filename(char *argv)
 
 	result = (const char *) &argv[(ft_strlen(argv) - 4)];
 	if (ft_strncmp(result, ".ber", 4) == 0)
-		return (0);
-	else
 		return (1);
+	else
+		return (0);
 }
 
 int	get_map(int argc, char **argv, t_game_map *map)
@@ -78,12 +78,22 @@ int	get_map(int argc, char **argv, t_game_map *map)
 
 	map = (t_game_map *)malloc(sizeof(t_game_map));
 	if (get_filename(argv[1]) || !map)
-		error("Invalid file name");
-	if (!open_file_map(argv[1], map, &map_height))
-		error("Internal error");
-	map->map_height = map_height;
-	map->map_length = map_length;
-	if (check_map(map))
-		error("Upps");
-	return(1);
+	{	
+		if (!open_file_map(argv[1], map, &(map->map_height)))
+		{
+			free(map);
+			map = NULL;
+			error("Internal error");
+			return (0);
+		}
+		if (check_map(map))
+			return(1);
+		error("Invalid map");
+		free_map_data(map);
+	}
+	error("Invalid file name");
+	map->map_data = NULL;
+	free(map);
+	map = NULL;
+	return(0);
 }

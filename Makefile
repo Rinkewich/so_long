@@ -15,7 +15,9 @@ SRCS_S		=	main.c\
 				get_next_line.c\
 				get_next_line_utils.c\
 				map_check_lwpe.c\
-				map_check_c.c
+				map_check_c.c\
+				player_place.c\
+				player_move.c
 HEADERS		=	./header/so_long.h
 OBJS_S		=	$(addprefix $(OBJS_DIR), $(notdir $(SRCS_S:.c=.o)))
 LIBFT		=	./libft/libft.a

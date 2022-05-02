@@ -6,7 +6,7 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 21:24:09 by fardath           #+#    #+#             */
-/*   Updated: 2022/05/02 16:17:49 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/02 20:20:19 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,19 @@
 # include <unistd.h>
 # include <fcntl.h>
 
+# define TILE_WIDTH 100
+
 # define PLAYER 'P'
 # define WALL '1'
 # define EXIT 'E'
 # define COUNT 'C'
 # define FLOOR '0'
+# define KEY_UP 13
+# define KEY_DOWN 1
+# define KEY_LEFT 0
+# define KEY_RIGHT 2
+# define RESET 15
+# define ESC 53
 
 typedef struct s_game_map
 {
@@ -53,25 +61,21 @@ typedef struct s_render_v
 	void	*win;
 }	t_render_v;
 
-enum	e_keycode
-{
-	KEY_UP = 13,
-	KEY_DOWN = 1,
-	KEY_LEFT = 0,
-	KEY_RIGHT = 2,
-	RESET = 15,
-	ESC = 53
-};
-int		get_map(int argc, char **argv, t_game_map *map);
+int			get_map(int argc, char **argv, t_game_map *map);
 int			get_filename(char *argv);
 void		error(char *error_code);
 int			open_file_map(char *argv, t_game_map *map, int *height);
 int			get_height(char *file);
 int			check_length(int *length, int height, char **map);
 int			check_wall(int length, int height, char **map);
-int		check_map(t_game_map *map);
+int			check_map(t_game_map *map);
 int			check_player(t_game_map *map);
 int			check_exit(t_game_map *map);
 int			check_count(t_game_map *map);
 int			check_sign(t_game_map *map);
+void		free_map_data(t_game_map *map);
+t_game_map	*player_place(int wasd, t_game_map *f_map);
+t_game_map	*get_wasd(t_game_map *map, int wasd);
+void		find_player(t_game_map *map, int *x, int *y);
+void	ft_free_stuff(t_game_map **game_map, t_render_v **vars);
 #endif
