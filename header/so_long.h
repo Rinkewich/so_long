@@ -6,7 +6,7 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 21:24:09 by fardath           #+#    #+#             */
-/*   Updated: 2022/05/02 20:20:19 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/02 21:16:40 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,5 @@ void		free_map_data(t_game_map *map);
 t_game_map	*player_place(int wasd, t_game_map *f_map);
 t_game_map	*get_wasd(t_game_map *map, int wasd);
 void		find_player(t_game_map *map, int *x, int *y);
-void	ft_free_stuff(t_game_map **game_map, t_render_v **vars);
+void		free_stuff(t_game_map *map, t_render_v *vars);
 #endif

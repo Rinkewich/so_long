@@ -6,7 +6,7 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 18:45:45 by fardath           #+#    #+#             */
-/*   Updated: 2022/05/02 20:14:51 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/02 21:13:53 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	find_player(t_game_map *map, int *x, int *y)
 
 	count = 0;
 	xPos = 0;
-	while (count <= map->map_height)
+	while (count < map->map_height)
 	{
 		line = map->map_data[count];
 		if (ft_strchr(line, 'P'))

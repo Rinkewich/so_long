@@ -6,7 +6,7 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 19:09:13 by fardath           #+#    #+#             */
-/*   Updated: 2022/05/02 20:22:53 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/02 21:14:19 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static t_game_map	*move_y(t_game_map *map, int direction)
 	{
 		map->player_position_y += direction * TILE_WIDTH;
 		map->steps++;
-		//print_step(map);
+		print_step(map);
 	}
 	return (map);
 }
@@ -61,7 +61,7 @@ static t_game_map	*move_x(t_game_map *map, int direction)
 	{
 		map->player_position_x += direction * TILE_WIDTH;
 		map->steps++;
-		//print_step(map);
+		print_step(map);
 	}
 	return (map);
 }
