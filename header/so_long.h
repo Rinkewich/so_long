@@ -6,7 +6,7 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 21:24:09 by fardath           #+#    #+#             */
-/*   Updated: 2022/05/02 21:16:40 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/07 21:36:50 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 # include <unistd.h>
 # include <fcntl.h>
 
+# define GAME_WON "You won!"
+# define BLUE 0x008080
+
 # define TILE_WIDTH 100
 
 # define PLAYER 'P'
@@ -27,12 +30,20 @@
 # define EXIT 'E'
 # define COUNT 'C'
 # define FLOOR '0'
+
 # define KEY_UP 13
 # define KEY_DOWN 1
 # define KEY_LEFT 0
 # define KEY_RIGHT 2
 # define RESET 15
 # define ESC 53
+
+# define WALL_XPM "../sprait/wall.xpm"
+# define PLAYER_XPM "../sprait/player.xpm"
+# define FLOOR_XPM "../sprait/floor.xpm"
+# define COUNT_XPM "../sprait/count.xpm"
+# define EXIT_XPM "../sprait/exit.xpm"
+
 
 typedef struct s_game_map
 {
@@ -78,4 +89,19 @@ t_game_map	*player_place(int wasd, t_game_map *f_map);
 t_game_map	*get_wasd(t_game_map *map, int wasd);
 void		find_player(t_game_map *map, int *x, int *y);
 void		free_stuff(t_game_map *map, t_render_v *vars);
+t_render_v *start_game(t_game_map *map);
+int			window_height(t_game_map *map);
+int			window_length(t_game_map *map);
+void		take_image_to_wind(t_game_map **map, t_render_v **vars);
+void		take_image_wall(t_render_v **vars, t_game_map **map);
+void		take_image_floor(t_render_v **vars, t_game_map **map);
+void		take_image_count(t_render_v **vars, t_game_map **map);
+void		take_image_exit(t_render_v **vars, t_game_map **map);
+void		take_image_player(t_render_v **vars, t_game_map **map);
+int			won_heignt(t_game_map *map);
+int			won_length(t_game_map *map);
+void		render_map(t_game_map *map, t_render_v **vars);
+void		set_count(int size[], int number[]);
+void		xpm(char letter, t_render_v **v, int size[], t_game_map **map);
+void		ft_put_img(t_render_v **vars, void *p, int x, int y);
 #endif

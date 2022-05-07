@@ -6,11 +6,12 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:16:13 by fardath           #+#    #+#             */
-/*   Updated: 2022/05/02 21:17:31 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/07 19:08:18 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/so_long.h"
+
 void	free_stuff(t_game_map *map, t_render_v *vars)
 {
 	static t_game_map	*mapm;
@@ -44,6 +45,7 @@ int	main(int argc, char **argv)
 	map.game_over = 0;
 	map.steps = 0;
 	player_place(-1, &map);
+	start_game(&map);
 	return (1);
 }
 //

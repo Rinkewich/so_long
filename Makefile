@@ -17,7 +17,12 @@ SRCS_S		=	main.c\
 				map_check_lwpe.c\
 				map_check_c.c\
 				player_place.c\
-				player_move.c
+				player_move.c\
+				game_start.c\
+				game_wind_render.c\
+				game_image.c\
+				game_render.c\
+				game_render_2.c
 HEADERS		=	./header/so_long.h
 OBJS_S		=	$(addprefix $(OBJS_DIR), $(notdir $(SRCS_S:.c=.o)))
 LIBFT		=	./libft/libft.a
