@@ -6,7 +6,7 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/30 21:16:13 by fardath           #+#    #+#             */
-/*   Updated: 2022/05/07 19:08:18 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/08 15:32:25 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv)
 		error("Incorrect number of arguments");
 	if (!get_map(argc, argv, &map))
 		return (0);
-	//free_stuff(&map, NULL);
+	free_stuff(&map, NULL);
 	map.game_score = 0;
 	map.game_over = 0;
 	map.steps = 0;

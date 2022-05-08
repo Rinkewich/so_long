@@ -6,7 +6,7 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/01 21:24:09 by fardath           #+#    #+#             */
-/*   Updated: 2022/05/07 21:36:50 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/08 15:32:15 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,6 @@ int			won_heignt(t_game_map *map);
 int			won_length(t_game_map *map);
 void		render_map(t_game_map *map, t_render_v **vars);
 void		set_count(int size[], int number[]);
-void		xpm(char letter, t_render_v **v, int size[], t_game_map **map);
+void		xpm(char letter, t_render_v **v, int *size, t_game_map **map);
 void		ft_put_img(t_render_v **vars, void *p, int x, int y);
 #endif

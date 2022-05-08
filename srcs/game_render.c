@@ -6,7 +6,7 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 20:23:26 by fardath           #+#    #+#             */
-/*   Updated: 2022/05/07 21:33:55 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/08 16:00:53 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ int	game_over(t_game_map **map, t_render_v **vars)
 
 	won[0] = won_heignt(*map);
 	won[1] = won_length(*map);
-	y = (*map)->player_position_y;
-	x = (*map)->player_position_x;
-	y = (*map)->player_position_y;
+	y = (*map)->player_position_y / TILE_WIDTH;
+	x = (*map)->player_position_x / TILE_WIDTH;
 	if ((*map)->map_data[x][y] == 'E' && game_end((*map)))
 		return (game_won(map, vars, won));
 	return (0);
@@ -53,6 +52,7 @@ static void	put_image_to_map(t_game_map *map, t_render_v **v)
 	num[1] = 0;
 	while (num[0] < map->map_height && v)
 	{
+		
 		while (map->map_data[num[0]][num[1]] != 0)
 		{
 			letter = map->map_data[num[0]][num[1]];
@@ -61,15 +61,19 @@ static void	put_image_to_map(t_game_map *map, t_render_v **v)
 			size[0] += TILE_WIDTH;
 		}
 		size[1] += TILE_WIDTH;
-		size[0] = 0;
 		num[0]++;
 		num[1] = 0;
+		size[0] = 0;
 	}
 }
 void	render_map(t_game_map *map, t_render_v **vars)
 {
-	if (!game_over(&map, vars))
+	if (map->map_data && vars && (!map->game_over))
 	{
-		put_image_to_map(map, vars);
+		mlx_clear_window((*vars)->mlx, (*vars)->win);
+		if (!game_over(&map, vars))
+		{
+			put_image_to_map(map, vars);
+		}
 	}
 }

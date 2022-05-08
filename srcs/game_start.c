@@ -6,7 +6,7 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 17:30:48 by fardath           #+#    #+#             */
-/*   Updated: 2022/05/07 21:37:26 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/08 16:36:35 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	key_hook(int keycode, t_render_v **vars)
 	if (keycode == 53)
 	{
 		mlx_destroy_window((*vars)->mlx, (*vars)->win);
-		//free_stuff(NULL, NULL);
+		free_stuff(NULL, NULL);
 		exit(0);
 		return (0);
 	}
@@ -40,6 +40,13 @@ static int	exit_hook(void)
 	exit(0);
 }
 
+static int render(t_game_map *map, t_render_v *v)
+{
+	mlx_clear_window(v->mlx, v->win);
+	render_map(map, &v);
+	return(0);
+}
+
 static t_render_v	*init_window(t_game_map *map)
 {
 	t_render_v	*vars;
@@ -50,14 +57,16 @@ static t_render_v	*init_window(t_game_map *map)
 	if (!vars)
 		return (NULL);
 	vars->mlx = mlx_init();
-	w_length = window_length(map);
-	w_height = window_height(map);
-	vars->win = mlx_new_window(vars->mlx, w_length, w_height, "fardath solong");
+	if (!vars->mlx)
+		return (NULL);
+	w_length = window_length(map) - 100;
+	w_height = window_height(map) - 100;
+	vars->win = mlx_new_window(vars->mlx, w_length, w_height, "so_long");
 	take_image_to_wind(&map, &vars);
-	free_stuff(NULL, vars);
-	free_stuff(map, NULL);
+	render_map(map, &vars);
 	mlx_key_hook(vars->win, key_hook, &vars);
 	mlx_hook(vars->win, 17, 0, exit_hook, &vars);
+	mlx_loop_hook(vars->mlx, render, &vars);
 	mlx_loop(vars->mlx);
 	key_hook(-1, &vars);
 	return (vars);

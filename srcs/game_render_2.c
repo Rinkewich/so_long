@@ -6,7 +6,7 @@
 /*   By: fardath <fardath@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 21:24:46 by fardath           #+#    #+#             */
-/*   Updated: 2022/05/07 21:30:54 by fardath          ###   ########.fr       */
+/*   Updated: 2022/05/08 15:21:27 by fardath          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void set_count(int size[], int number[])
 	number[1] = 0;
 }
 
-void xpm(char letter, t_render_v **v, int size[], t_game_map **map)
+void xpm(char letter, t_render_v **v, int *size, t_game_map **map)
 {
 	ft_put_img(v, (*map)->floor, size[0], size[1]);
 	if (letter == WALL)
